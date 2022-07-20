@@ -1,5 +1,5 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 require("dotenv").config();
 const connection = require("../db-config.js");
 const bcrypt = require("bcrypt");
@@ -28,14 +28,18 @@ app.get('/', (req, res) => {
   res.send('Successfully connected to the world surf journal backend')
 })
 
-app.post("/registration", (req, res) => {
+app.post("/api/registration", (req, res) => {
     bcrypt
      .hash(req.body.password, 10)
      .then((hashedPassword) => {
         let newUser = {
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
             email: req.body.email,
             password: hashedPassword,
         };
+        console.log(newUser);
+        console.log(newUser.password);
         connection.query('INSERT INTO users SET ?', newUser, (err) => {
             if(err) {
                 res
