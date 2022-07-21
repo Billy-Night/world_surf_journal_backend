@@ -90,6 +90,31 @@ app.post('/api/log-in', (req, res) => {
       );
   });
 
+  app.post('/api/trip/log', (req, res) => {
+    let tripLog = {
+        where: req.body.where,
+        when: req.body.when,
+        who: req.body.who,
+        how: req.body.how,
+        rating: req.body.rating,
+        notes: req.body.notes,
+        gear: req.body.gear,
+        quiver: req.body.quiver,
+        duration: req.body.duration,
+        users_id: req.body.users_id
+    }
+    console.log(tripLog);
+    connection.query('INSERT INTO trip_log SET ?', tripLog, (err) => {
+        if(err) {
+            console.log("There was an error adding the trip to the DB");
+            res.status(500).send('There was a server error when adding the trip')
+        } else {
+            res.status(200).send('The trip was added successfully');
+            console.log("The trip was added successfully");
+        }
+    });
+  });
+
 app.listen(port, (err) => {
     if (err) {
         console.error('There was a problem with the server connection');
