@@ -54,6 +54,42 @@ app.post("/api/registration", (req, res) => {
     console.error(`There was an error encrypting the password. Error: ${hashError}`));
 });
 
+app.post('/api/log-in', (req, res) => {
+    let user = {
+        email: req.body.email,
+        password: req.body.password
+    }
+    connection.query(
+        "SELECT * FROM users WHERE email = ?", user.email,
+        (err, results) => {
+          if (err) {
+            res.status(500).send("Email not found");
+          } else {
+            bcrypt
+              .compare(user.password, results[0].password)
+              .then((isAMatch) => {
+                if (isAMatch) {
+              const generatedToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET
+              );
+                  res.status(200).json({
+                    message: "Successfully logged in!",
+                    token: generatedToken,
+                    loggedIn: true,
+                    id: results[0].id,
+                    first_name: results[0].first_name,
+                  });
+                } else {
+                  res.status(500).send("Wrong password");
+                }
+              })
+              .catch((passwordError) => 
+              console.error("Error trying to decrypt the password")
+              );
+            }
+          }
+      );
+  });
+
 app.listen(port, (err) => {
     if (err) {
         console.error('There was a problem with the server connection');
