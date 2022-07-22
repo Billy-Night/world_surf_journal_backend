@@ -92,6 +92,8 @@
 
     app.post('/api/trip/log', (req, res) => {
         let tripLog = {
+            title: req.body.title,
+            image: req.body.image,
             where: req.body.where,
             when: req.body.when,
             who: req.body.who,
@@ -130,6 +132,34 @@
             }
         })
     })
+
+    app.put('/api/trip/log/update', (req, res) => {
+        let userId = req.body.users_id;
+        let tripId = req.body.id;
+        let tripUpdate = {
+            title: req.body.title,
+            image: req.body.image,
+            where: req.body.where,
+            when: req.body.when,
+            who: req.body.who,
+            how: req.body.how,
+            rating: req.body.rating,
+            notes: req.body.notes,
+            gear: req.body.gear,
+            quiver: req.body.quiver,
+            duration: req.body.duration,
+        }
+        console.log(tripUpdate);
+        connection.query('UPDATE trip_log SET ? WHERE trip_log.id = ? AND trip_log.users_id = ?', [tripUpdate, tripId, userId], (err) => {
+            if(err) {
+                console.log("There was an error updating the trip in DB");
+                res.status(500).send('There was a server error when updating the trip')
+            } else {
+                res.status(200).send('The trip was updated successfully');
+                console.log("The trip was updated successfully");
+            }
+        });
+    });
 
     app.listen(port, (err) => {
         if (err) {
