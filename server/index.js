@@ -38,8 +38,8 @@
                 email: req.body.email,
                 password: hashedPassword,
             };
-            console.log(newUser);
-            console.log(newUser.password);
+            // console.log(newUser);
+            // console.log(newUser.password);
             connection.query('INSERT INTO users SET ?', newUser, (err) => {
                 if(err) {
                     res
@@ -57,7 +57,7 @@
     app.post('/api/log-in', (req, res) => {
         let user = {
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
         }
         connection.query(
             "SELECT * FROM users WHERE email = ?", user.email,
@@ -119,7 +119,7 @@
 
     app.get('/api/trips/:id', (req, res) => {
         id = req.params.id;
-        console.log(id);
+        // console.log(id);
         connection.query('SELECT * FROM trip_log WHERE users_id = ?', id, (err, result) => {
             if (err) {
                 res.status(400).send("There was a problem getting trip data");
@@ -149,7 +149,7 @@
             quiver: req.body.quiver,
             duration: req.body.duration,
         }
-        console.log(tripUpdate);
+        // console.log(tripUpdate);
         connection.query('UPDATE trip_log SET ? WHERE trip_log.id = ? AND trip_log.users_id = ?', [tripUpdate, tripId, userId], (err) => {
             if(err) {
                 console.log("There was an error updating the trip in DB");
