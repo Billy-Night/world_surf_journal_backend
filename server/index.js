@@ -105,7 +105,7 @@
             duration: req.body.duration,
             users_id: req.body.users_id
         }
-        console.log(tripLog);
+        // console.log(tripLog);
         connection.query('INSERT INTO trip_log SET ?', tripLog, (err) => {
             if(err) {
                 console.log("There was an error adding the trip to the DB");
