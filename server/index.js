@@ -64,6 +64,7 @@
             (err, results) => {
             if (err) {
                 res.status(500).send("Email not found");
+                console.log("Email not found");
             } else {
                 bcrypt
                 .compare(user.password, results[0].password)
