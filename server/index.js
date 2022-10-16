@@ -55,17 +55,21 @@
     });
 
     app.post('/api/log-in', (req, res) => {
+        // console.log(req.body);
         let user = {
             email: req.body.email,
             password: req.body.password,
         }
+
         connection.query(
             "SELECT * FROM users WHERE email = ?", user.email,
             (err, results) => {
-            if (err) {
-                res.status(500).send("Email not found");
-                console.log("Email not found");
+            if (results.length === 0) {
+                // console.log(err);
+                res.status(404).send("Email not found");
+                // console.log("Email not found");
             } else {
+                // console.log(results);
                 bcrypt
                 .compare(user.password, results[0].password)
                 .then((isAMatch) => {
