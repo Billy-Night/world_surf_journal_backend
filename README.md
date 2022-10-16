@@ -28,7 +28,7 @@ The backend can be set-up by the following
     - `https://github.com/Billy-Night/world_surf_journal`
 
 The database script can be found under the file name:
- - `wsj_db.sql` .
+ - `wsj_db.sql` . 
 
 ## Future Development
 
