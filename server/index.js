@@ -166,6 +166,20 @@
         });
     });
 
+    app.delete('/api/trip/log/delete/:id', (req, res) => {
+        let tripId = req.params.id;
+        // console.log(id);
+        connection.query('DELETE FROM trip_log WHERE trip_log.id = ?', [tripId], (err) => {
+            if(err) {
+                console.log("There was a problem with finding the trip in the backend");
+                res.status(204).send('There was a server error when trying to delete the trip');
+            } else {
+                res.status(200).send('The trip has been deleted successfully');
+                console.log("The trip has been deleted");
+            }
+        })
+    })
+
     app.listen(port, (err) => {
         if (err) {
             console.error('There was a problem with the server connection');
