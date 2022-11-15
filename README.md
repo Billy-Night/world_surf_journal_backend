@@ -32,4 +32,4 @@ The database script can be found under the file name:
 
 ## Future Development
 
-The future development of the backend would be to improve the project architecture. 
+The future development of the backend would be to improve the project architecture.  
