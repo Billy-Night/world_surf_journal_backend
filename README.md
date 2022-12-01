@@ -6,6 +6,10 @@ This is the the backend that serves the frontend of the World Surf Journal websi
 Please find all the necessary information about this project in the frontend folder a link of which can be found bellow:
 
 `https://github.com/Billy-Night/world_surf_journal`
+
+## Technologies
+
+- The project use MYSQL to connect to the database.
 ### Installation Guide
 
 The project was created using React for the frontend and Node.js for the backend.
