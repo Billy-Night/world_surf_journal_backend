@@ -9,7 +9,7 @@ Please find all the necessary information about this project in the frontend fol
 
 ## Technologies
 
-- The project use MYSQL to connect to the database.
+- The project use MYSQL to connect to the database. 
 ### Installation Guide
 
 The project was created using React for the frontend and Node.js for the backend.
