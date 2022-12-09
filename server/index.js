@@ -64,10 +64,10 @@
         connection.query(
             "SELECT * FROM users WHERE email = ?", user.email,
             (err, results) => {
-            if (results.length === 0) {
+                if (results.length === 0) {
                 // console.log(err);
-                res.status(404).send("Email not found");
-                // console.log("Email not found");
+                res.status(401).send("Email not found");
+                console.log(err);
             } else {
                 // console.log(results);
                 bcrypt
