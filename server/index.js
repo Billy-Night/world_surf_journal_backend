@@ -28,7 +28,7 @@
 
 //Routes
     app.get('/', (req, res) => {
-    res.send(`Successfully connected to the world surf journal backend and ${dbConnection}`)
+    res.send(`Successfully connected to the world surf journal backend and ... Need to add information here for the db`)
     })
 
     app.post("/api/registration", (req, res) => {
