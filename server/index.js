@@ -9,12 +9,15 @@
 //port set-up
     const port = process.env.PORT ?? 5000;
 
+    let dbConnection = " ";
+
 //db connection
     connection.connect((err) => {
         if (err) {
             console.error('error connecting' + err.stack);
         } else {
             console.log('connected to the database with threadId: ' + connection.threadId);
+            dbConnection = 'connected to the database with threadId: ' + connection.threadId;
         }
     });
 
@@ -25,7 +28,7 @@
 
 //Routes
     app.get('/', (req, res) => {
-    res.send('Successfully connected to the world surf journal backend')
+    res.send(`Successfully connected to the world surf journal backend and ${dbConnection}`)
     })
 
     app.post("/api/registration", (req, res) => {
