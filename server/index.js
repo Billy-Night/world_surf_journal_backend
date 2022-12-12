@@ -1,32 +1,31 @@
     const express = require('express');
     const app = express();
     require("dotenv").config();
-    const connection = require("../db-config.js");
+    const pool = require("../db-config.js");
+    // const mysql = require("mysql2");
     const bcrypt = require("bcrypt");
     const jwt = require("jsonwebtoken");
     const cors = require("cors");
 
-//port set-up
+    //port set-up
     const port = process.env.PORT ?? 5000;
 
-    let dbConnection = " ";
+    //db connection
+    // connection.connect((err) => {
+    //     if (err) {
+    //         console.error('error connecting' + err.stack);
+    //     } else {
+    //         console.log('connected to the database with threadId: ' + connection.threadId);
+    //         dbConnection = 'connected to the database with threadId: ' + connection.threadId;
+    //     }
+    // });
 
-//db connection
-    connection.connect((err) => {
-        if (err) {
-            console.error('error connecting' + err.stack);
-        } else {
-            console.log('connected to the database with threadId: ' + connection.threadId);
-            dbConnection = 'connected to the database with threadId: ' + connection.threadId;
-        }
-    });
-
-//middleware
+    //middleware
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     app.use(cors());
 
-//Routes
+    //Routes
     app.get('/', (req, res) => {
     res.send(`Successfully connected to the world surf journal backend and ... Need to add information here for the db`)
     })
@@ -43,7 +42,7 @@
             };
             // console.log(newUser);
             // console.log(newUser.password);
-            connection.query('INSERT INTO users SET ?', newUser, (err) => {
+            pool.query('INSERT INTO users SET ?', newUser, (err) => {
                 if(err) {
                     res
                     .status(500)
@@ -64,7 +63,7 @@
             password: req.body.password,
         }
 
-        connection.query(
+        pool.query(
             "SELECT * FROM users WHERE email = ?", user.email,
             (err, results) => {
                 if (results.length === 0) {
@@ -114,7 +113,7 @@
             users_id: req.body.users_id
         }
         // console.log(tripLog);
-        connection.query('INSERT INTO trip_log SET ?', tripLog, (err) => {
+        pool.query('INSERT INTO trip_log SET ?', tripLog, (err) => {
             if(err) {
                 console.log("There was an error adding the trip to the DB");
                 res.status(500).send('There was a server error when adding the trip')
@@ -128,7 +127,7 @@
     app.get('/api/trips/:id', (req, res) => {
         id = req.params.id;
         // console.log(id);
-        connection.query('SELECT * FROM trip_log WHERE users_id = ?', id, (err, result) => {
+        pool.query('SELECT * FROM trip_log WHERE users_id = ?', id, (err, result) => {
             if (err) {
                 res.status(400).send("There was a problem getting trip data");
                 // console.log("BE problem")
@@ -158,7 +157,7 @@
             duration: req.body.duration,
         }
         // console.log(tripUpdate);
-        connection.query('UPDATE trip_log SET ? WHERE trip_log.id = ? AND trip_log.users_id = ?', [tripUpdate, tripId, userId], (err) => {
+        pool.query('UPDATE trip_log SET ? WHERE trip_log.id = ? AND trip_log.users_id = ?', [tripUpdate, tripId, userId], (err) => {
             if(err) {
                 console.log("There was an error updating the trip in DB");
                 res.status(500).send('There was a server error when updating the trip')
@@ -172,7 +171,7 @@
     app.delete('/api/trip/log/delete/:id', (req, res) => {
         let tripId = req.params.id;
         // console.log(id);
-        connection.query('DELETE FROM trip_log WHERE trip_log.id = ?', [tripId], (err) => {
+        pool.query('DELETE FROM trip_log WHERE trip_log.id = ?', [tripId], (err) => {
             if(err) {
                 console.log("There was a problem with finding the trip in the backend");
                 res.status(204).send('There was a server error when trying to delete the trip');
