@@ -66,7 +66,7 @@
         pool.query(
             "SELECT * FROM users WHERE email = ?", user.email,
             (err, results) => {
-                if (result === undefined){
+                if (results === undefined){
                     res.status(400).send("result is undefined");
                     console.log(err);
                 } else if (results.length === 0) {
