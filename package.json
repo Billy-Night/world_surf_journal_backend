@@ -2,9 +2,6 @@
   "name": "world_surf_journal_backend",
   "version": "1.0.0",
   "description": "",
-  "engines": {
-    "node": "18.12.1"
-  },
   "main": "app.js",
   "scripts": {
     "dev": "nodemon app.js",
