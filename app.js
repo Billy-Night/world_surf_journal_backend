@@ -2,20 +2,20 @@ const express = require("express");
 const app = express();
 require("dotenv").config();
 const cors = require("cors");
-const port = process.env.PORT ?? 5000;
+const port = process.env.PORT || 5000;
 const userRoutes = require("./routes/users.js");
 const tripsRoutes = require("./routes/trips.js");
 
 const corsOptions = {
-  origin: `${process.env.ORIGIN}${port}`,
-  credential: true,
+  origin: "*", // Or better: use the frontend URL from Railway
+  credentials: true,
 };
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
 
-app.use(userRoutes);
+app.use("/api", userRoutes);
 app.use(tripsRoutes);
 
 app.listen(port, (err) => {
