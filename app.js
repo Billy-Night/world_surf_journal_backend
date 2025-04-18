@@ -3,8 +3,8 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const port = process.env.PORT ?? 5000;
-const userRoutes = require("../world_surf_journal_backend/routes/users.js");
-const tripsRoutes = require("../world_surf_journal_backend/routes/trips.js");
+const userRoutes = require("./routes/users.js");
+const tripsRoutes = require("./routes/trips.js");
 
 const corsOptions = {
   origin: `${process.env.ORIGIN}${port}`,
