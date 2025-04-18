@@ -1,7 +1,6 @@
 const express = require("express");
 const app = express();
 require("dotenv").config();
-const pool = require("./util/database");
 const cors = require("cors");
 const port = process.env.PORT ?? 5000;
 const userRoutes = require("../world_surf_journal_backend/routes/users.js");
