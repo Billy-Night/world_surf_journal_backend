@@ -2,15 +2,19 @@
   "name": "world_surf_journal_backend",
   "version": "1.0.0",
   "description": "",
-  "engines":{
-    "node":"18.12.1"
+  "engines": {
+    "node": "18.12.1"
   },
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "dev": "nodemon app.js",
+    "start": "node app.js"
   },
-  "keywords": [ "node", "heroku", "express" ],
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
