@@ -7,10 +7,10 @@ const userRoutes = require("./routes/users.js");
 const tripsRoutes = require("./routes/trips.js");
 
 const corsOptions = {
-  origin: "*", // Or better: use the frontend URL from Railway
+  origin: "*",
   credentials: true,
 };
-
+console.log("ENV PORT:", process.env.PORT);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors(corsOptions));
