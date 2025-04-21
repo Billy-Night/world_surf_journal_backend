@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "engines": {
-    "node": "18.12.1"
+    "node": "23.10.0"
   },
   "scripts": {
     "dev": "nodemon app.js",
