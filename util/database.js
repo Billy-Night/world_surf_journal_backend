@@ -11,7 +11,7 @@ const pool = mysql.createPool({
   user: process.env.MYSQLUSER,
 });
 
-pool.connect((err) => {
+pool.getConnection((err) => {
   if (err) {
     console.error("Database connection failed:", err.stack);
     process.exit(1);
