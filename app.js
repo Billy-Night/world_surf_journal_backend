@@ -8,7 +8,7 @@ const userRoutes = require("./routes/users.js");
 const tripsRoutes = require("./routes/trips.js");
 
 const corsOptions = {
-  origin: "*",
+  origin: process.env.ORIGIN_RAIL,
   credentials: true,
 };
 console.log("ENV PORT:", process.env.PORT);
