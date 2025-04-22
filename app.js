@@ -1,4 +1,3 @@
-console.log("App starting...");
 const express = require("express");
 const app = express();
 require("dotenv").config();
@@ -13,7 +12,7 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
-app.options(/^\/api\/.*$/, cors(corsOptions));
+// app.options(/^\/api\/.*$/, cors(corsOptions));
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
     res.sendStatus(200);
@@ -21,8 +20,7 @@ app.use((req, res, next) => {
     next();
   }
 });
-//console.log("Allowed origin:", process.env.ORIGIN_RAIL);
-//console.log("ENV PORT:", process.env.PORT);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
