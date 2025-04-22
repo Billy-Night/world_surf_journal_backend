@@ -9,12 +9,11 @@ const tripsRoutes = require("./routes/trips.js");
 
 const corsOptions = {
   origin: process.env.ORIGIN_RAIL,
-  credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions));
+app.options("/api/*", cors(corsOptions));
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
     res.sendStatus(200);
