@@ -10,13 +10,13 @@ const tripsRoutes = require("./routes/trips.js");
 const corsOptions = {
   origin: process.env.ORIGIN_RAIL,
   credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
+app.use(cors(corsOptions));
 console.log("ENV PORT:", process.env.PORT);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors(corsOptions));
 
 app.use("/api", userRoutes);
 app.use(tripsRoutes);
