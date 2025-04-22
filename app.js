@@ -14,6 +14,8 @@ const corsOptions = {
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+console.log("Allowed origin:", process.env.ORIGIN_RAIL);
 console.log("ENV PORT:", process.env.PORT);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
