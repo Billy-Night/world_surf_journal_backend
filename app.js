@@ -15,8 +15,15 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
-console.log("Allowed origin:", process.env.ORIGIN_RAIL);
-console.log("ENV PORT:", process.env.PORT);
+app.use((req, res, next) => {
+  if (req.method === "OPTIONS") {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+});
+//console.log("Allowed origin:", process.env.ORIGIN_RAIL);
+//console.log("ENV PORT:", process.env.PORT);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
