@@ -10,6 +10,8 @@ const tripsRoutes = require("./routes/trips.js");
 const corsOptions = {
   origin: process.env.ORIGIN_RAIL,
   credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
 };
 console.log("ENV PORT:", process.env.PORT);
 app.use(express.json());
